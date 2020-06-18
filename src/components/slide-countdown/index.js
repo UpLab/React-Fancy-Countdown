@@ -24,6 +24,7 @@ const slideCountdown = (WrappedComponent) => {
         due: false,
         initDone: false
       };
+      this.wrappedComponentRef = React.createRef();
 
       this.updateTime = this.updateTime.bind(this);
       this.slide = this.slide.bind(this);
@@ -42,7 +43,7 @@ const slideCountdown = (WrappedComponent) => {
         if (ones != onesDom.querySelector('.bottom').innerHTML) this.slide(onesDom, ones);
       };
 
-      let _thisDoc = ReactDOM.findDOMNode(this);
+      let _thisDoc = this.wrappedComponentRef.current
       let timeObjs = DateTimeUtil.getTimeObjs(flatSeconds, this.props.days, this.props.weeks);
 
       if (this.state.initDone) {
@@ -79,7 +80,7 @@ const slideCountdown = (WrappedComponent) => {
         return target;
       }
 
-      let _thisDoc = ReactDOM.findDOMNode(this);
+      let _thisDoc = this.wrappedComponentRef.current
       let units = ['seconds', 'minutes', 'hours', 'days', 'weeks'];
       let digits = ['tens', 'ones'];
       let doms = ['top', 'bottom'];
@@ -127,7 +128,7 @@ const slideCountdown = (WrappedComponent) => {
         <WrappedComponent
           { ...this.props }
           updateTime={ this.updateTime }>
-          <div className="slideCountdown">
+          <div className="slideCountdown" ref={ this.wrappedComponentRef }>
             { this.props.weeks && this.props.days ? (
             <div className="slide-block-time weeks">
               <div className="wrap-stage">
