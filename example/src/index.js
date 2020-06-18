@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+// import './index.scss';
 import { Container, Row, Col, Table, Button } from 'reactstrap';
 import Highlight from 'react-highlight';
 import moment from 'moment';

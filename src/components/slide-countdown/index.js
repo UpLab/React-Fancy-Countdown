@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DateTimeUtil from '../../datetime-util';
 import Effect from '../../effect';
 
-import './index.scss';
+// import './index.scss';
 
 const slideCountdown = (WrappedComponent) => {
 
