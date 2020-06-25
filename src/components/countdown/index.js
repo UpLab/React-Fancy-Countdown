@@ -30,7 +30,7 @@ class Countdown extends React.Component {
 
     /** pause timer when tab inactive. */
     document.addEventListener("visibilitychange", () => {
-      switch(document.visibilityState) {
+      switch (document.visibilityState) {
         case 'hidden':
           this.pause = true;
           break;
@@ -39,6 +39,9 @@ class Countdown extends React.Component {
           break;
       }
     });
+  }
+  componentWillUnmount() {
+    this.stop(true)
   }
 
   componentWillUpdate(nextProps) {
@@ -72,27 +75,29 @@ class Countdown extends React.Component {
     }
   }
 
-  stop() {
+  stop(immediately = false) {
+    immediately && clearInterval(this.timer)
     this.setState({
       due: true
     }, () => {
+      immediately || clearInterval(this.timer);
+      this.timer = null;
       this.props.callback();
-      clearInterval(this.timer);
     });
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <div className={this.props.className} id={this.props.id}>
-        { this.state.due ? this.props.dueElement : this.props.children }
+        {this.state.due ? this.props.dueElement : this.props.children}
       </div>
     );
-	}
+  }
 
 }
 
 Countdown.propTypes = {
-	deadline: PropTypes.string.isRequired,
+  deadline: PropTypes.string.isRequired,
   updateTime: PropTypes.func.isRequired,
   callback: PropTypes.func.isRequired,
   interval: PropTypes.number,

@@ -73,6 +73,11 @@ var Countdown = function (_React$Component) {
       });
     }
   }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.stop(true);
+    }
+  }, {
     key: 'componentWillUpdate',
     value: function componentWillUpdate(nextProps) {
       var _this3 = this;
@@ -115,11 +120,15 @@ var Countdown = function (_React$Component) {
     value: function stop() {
       var _this5 = this;
 
+      var immediately = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      immediately && clearInterval(this.timer);
       this.setState({
         due: true
       }, function () {
+        immediately || clearInterval(_this5.timer);
+        _this5.timer = null;
         _this5.props.callback();
-        clearInterval(_this5.timer);
       });
     }
   }, {

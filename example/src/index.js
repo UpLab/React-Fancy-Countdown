@@ -18,10 +18,12 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      tenSecondsLater: moment().add(9, 'seconds').format('YYYY-MM-DD HH:mm:ss')
+      tenSecondsLater: moment().add(9, 'seconds').format('YYYY-MM-DD HH:mm:ss'),
+      isMounted: true
     };
 
     this.resetTimer = this.resetTimer.bind(this);
+    this.toggleMount = this.toggleMount.bind(this);
   }
 
   resetTimer() {
@@ -37,14 +39,20 @@ class App extends React.Component {
     this.tenHoursLater = moment().add(10, 'hours').format('YYYY-MM-DD HH:mm:ss');
   }
 
+  toggleMount(){
+    const { isMounted } = this.state
+    this.setState({ isMounted: !isMounted });
+  }
+
   render() {
     const Due = () => ( <div className="due">Game over =)</div> );
     const Due2 = () => ( <div className="due">Time is up !!!! =)</div> );
     const Due3 = () => ( <div className="due">Time is up, Hope you'll like this component !!!! =)</div> );
-
+    const { isMounted } = this.state;
+    if (!isMounted) return <div><button onClick={this.toggleMount}>toggle mount</button></div>
     return (
       <div>
-
+        <button onClick={this.toggleMount}>toggle mount</button>
         <a href="https://github.com/AbnerLin/React-Fancy-Countdown">
           <img
             style={{position: 'absolute', top: 0, right: 0, border: 0}}

@@ -58,6 +58,7 @@ var slideCountdown = function slideCountdown(WrappedComponent) {
         due: false,
         initDone: false
       };
+      _this.wrappedComponentRef = _react2.default.createRef();
 
       _this.updateTime = _this.updateTime.bind(_this);
       _this.slide = _this.slide.bind(_this);
@@ -80,7 +81,7 @@ var slideCountdown = function slideCountdown(WrappedComponent) {
           if (ones != onesDom.querySelector('.bottom').innerHTML) _this2.slide(onesDom, ones);
         };
 
-        var _thisDoc = _reactDom2.default.findDOMNode(this);
+        var _thisDoc = this.wrappedComponentRef.current;
         var timeObjs = _datetimeUtil2.default.getTimeObjs(flatSeconds, this.props.days, this.props.weeks);
 
         if (this.state.initDone) {
@@ -122,7 +123,7 @@ var slideCountdown = function slideCountdown(WrappedComponent) {
           return target;
         };
 
-        var _thisDoc = _reactDom2.default.findDOMNode(this);
+        var _thisDoc = this.wrappedComponentRef.current;
         var units = ['seconds', 'minutes', 'hours', 'days', 'weeks'];
         var digits = ['tens', 'ones'];
         var doms = ['top', 'bottom'];
@@ -173,7 +174,7 @@ var slideCountdown = function slideCountdown(WrappedComponent) {
             updateTime: this.updateTime }),
           _react2.default.createElement(
             'div',
-            { className: 'slideCountdown' },
+            { className: 'slideCountdown', ref: this.wrappedComponentRef },
             this.props.weeks && this.props.days ? _react2.default.createElement(
               'div',
               { className: 'slide-block-time weeks' },
