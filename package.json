@@ -27,8 +27,8 @@
   "author": "AbnerLin",
   "license": "MIT",
   "peerDependencies": {
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   },
   "bugs": {
     "url": "https://github.com/AbnerLin/React-Fancy-Countdown/issues"
